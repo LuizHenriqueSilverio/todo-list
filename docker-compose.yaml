@@ -1,0 +1,74 @@
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    container_name: mysql-todo
+    environment:
+      MYSQL_ROOT_PASSWORD: db_root_pass
+      MYSQL_DATABASE: todo
+      MYSQL_USER: todouser
+      MYSQL_PASSWORD: todopass
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - todo-network
+
+  backend:
+    build:
+      context: ./todolist-backend
+      dockerfile: Dockerfile
+    container_name: todo-backend
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: todouser
+      DB_PASSWORD: todopass
+      DB_NAME: todo
+      JWT_SECRET: A0xbh+/E4IHf8WIA9p8JLw==
+    ports:
+      - "3000:3000"
+    networks:
+      - todo-network
+
+  frontend:
+    build:
+      context: ./todolist-frontend
+      dockerfile: Dockerfile
+    container_name: todo-frontend
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    networks:
+      - todo-network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - frontend
+    networks:
+      - todo-network
+
+volumes:
+  db-data:
+  frontend-dist:
+
+networks:
+  todo-network:

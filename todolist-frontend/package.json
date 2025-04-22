@@ -1,0 +1,36 @@
+{
+  "name": "todolist-frontend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "vite preview",
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@mdi/font": "5.9.55",
+    "axios": "^1.8.4",
+    "roboto-fontface": "*",
+    "sass": "^1.86.3",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
+    "webfontloader": "^1.0.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.4.47",
+    "@types/webfontloader": "^1.0.0",
+    "@vitejs/plugin-vue": "^5.2.3",
+    "@vitejs/plugin-vue-jsx": "^4.1.2",
+    "@vue/compiler-sfc": "^3.5.13",
+    "@vue/tsconfig": "^0.7.0",
+    "autoprefixer": "^10.4.21",
+    "material-design-icons-iconfont": "^6.7.0",
+    "pinia": "^3.0.2",
+    "postcss": "^8.5.3",
+    "typescript": "~5.7.2",
+    "vite": "^6.3.1",
+    "vue-tsc": "^2.2.8"
+  },
+  "type": "module"
+}
