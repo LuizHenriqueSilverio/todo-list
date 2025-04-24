@@ -1,0 +1,28 @@
+# Dependências já são instaladas no container
+node_modules
+dist
+coverage
+*.log
+
+# Configs e arquivos do sistema operacional/editor
+.env
+.DS_Store
+.vscode
+.idea
+*.swp
+
+# Testes e documentos locais
+__tests__
+*.test.ts
+*.spec.ts
+jest.config.js
+tsconfig.test.json
+
+# Docker e CI
+docker-compose.yml
+Dockerfile*
+.dockerignore
+
+# Git
+.git
+.gitignore
